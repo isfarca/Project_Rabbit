@@ -5,11 +5,6 @@ public class Player : MonoBehaviour
     // Value types
     private float x, z;
     private float speed = 3f;
-
-    // Use this for initialization
-    void Start()
-    {
-	}
 	
 	// Update is called once per frame
 	void Update()

@@ -2,6 +2,9 @@
 
 public class MainMenu : MonoBehaviour
 {
+    /// <summary>
+    /// Output the main menu.
+    /// </summary>
     private void OnGUI()
     {
         // Declare variables
@@ -27,6 +30,6 @@ public class MainMenu : MonoBehaviour
         else if (GUI.Button(new Rect((Screen.width / 2 - 420), (Screen.height / 2 - 90), 200, 20), "Options", style))
             Debug.Log("Options");
         else if (GUI.Button(new Rect((Screen.width / 2 - 420), (Screen.height / 2 - 60), 200, 20), "Quit", style))
-            Debug.Log("Quit");
+            Application.Quit();
     }
 }
