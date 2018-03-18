@@ -13,6 +13,14 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
+<<<<<<< HEAD
+    <CompilerResponseFile></CompilerResponseFile>
+    <UnityProjectGenerator>VSTU</UnityProjectGenerator>
+    <UnityProjectType>Game:1</UnityProjectType>
+    <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
+    <UnityVersion>2017.3.1f1</UnityVersion>
+    <RootNamespace></RootNamespace>
+=======
     <CompilerResponseFile>
     </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
@@ -20,6 +28,7 @@
     <UnityVersion>2017.3.1f1</UnityVersion>
     <RootNamespace>
     </RootNamespace>
+>>>>>>> 4d9dedd00d7d74f8db1b0e091613354b2cbd371e
     <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -299,9 +308,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Campsite.cs" />
+    <Compile Include="Assets\Scripts\LoseScreen.cs" />
     <Compile Include="Assets\Scripts\MainMenu.cs" />
-    <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\Options.cs" />
+    <Compile Include="Assets\Scripts\Player.cs" />
+<<<<<<< HEAD
+    <Compile Include="Assets\Scripts\Trash.cs" />
+    <Compile Include="Assets\Scripts\TrashManager.cs" />
+=======
+    <Compile Include="Assets\Scripts\Options.cs" />
+>>>>>>> 4d9dedd00d7d74f8db1b0e091613354b2cbd371e
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

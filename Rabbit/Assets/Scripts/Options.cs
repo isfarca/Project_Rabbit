@@ -20,7 +20,11 @@ public class Options : MonoBehaviour
         Font font;
 
         // Set font.
+<<<<<<< HEAD
+        font = (Font)Resources.Load("Fonts/Screen", typeof(Font));
+=======
         font = (Font)Resources.Load("Fonts/Screens", typeof(Font));
+>>>>>>> 4d9dedd00d7d74f8db1b0e091613354b2cbd371e
 
         style.font = font;
         // Set font for heading.

@@ -12,7 +12,7 @@ public class MainMenu : MonoBehaviour
         Font font;
 
         // Set font for heading and button.
-        font = (Font)Resources.Load("Fonts/Screens", typeof(Font));
+        font = (Font)Resources.Load("Fonts/Screen", typeof(Font));
 
         style.font = font;
         // Set font size for heading.
