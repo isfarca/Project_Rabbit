@@ -36,6 +36,14 @@ public class TrashSystem : MonoBehaviour
         }
     }
 
+    // Update is called once per frame
+    void Update()
+    {
+        // Destroy trash, out of the scene.
+        if (transform.position.y < -10f)
+            Destroy(gameObject);
+    }
+
     /// <summary>
     /// By collision with 'Terrain', than disable gravity and set trigger.
     /// </summary>

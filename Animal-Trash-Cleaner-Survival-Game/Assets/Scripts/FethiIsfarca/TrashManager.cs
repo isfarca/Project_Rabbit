@@ -3,6 +3,7 @@
 public class TrashManager : MonoBehaviour
 {
     // Value types
+    private int instantiateCount = 0;
     private int frames = 0;
     private int seconds = 0;
     public int maxSeconds;
@@ -10,9 +11,9 @@ public class TrashManager : MonoBehaviour
     // Reference types
     public GameObject[] trashPrefabs;
     public GameObject[] spawnPoints;
-	
-	// Update is called once per frame
-	void Update()
+
+    // Update is called once per frame
+    void Update()
     {
         // Declare variables
         GameObject trash;
@@ -28,7 +29,7 @@ public class TrashManager : MonoBehaviour
             // Reset frames.
             frames = 0;
 
-            // After 20 seconds, instantiate trash in the scene.
+            // After x seconds, instantiate trash in the scene.
             if (seconds >= maxSeconds)
             {
                 // Instantiate random trash in random spawn point.
@@ -37,10 +38,15 @@ public class TrashManager : MonoBehaviour
                 // Clone trash in 'TrashManager'.
                 transform.parent = trash.transform;
 
+                Debug.Log("Trash spawned!");
+
+                instantiateCount++;
+
+                if (instantiateCount >= 50)
+                    Debug.Log("You Lost!");
+
                 // Reset seconds.
                 seconds = 0;
-
-                Debug.Log("Trash spawned!");
             }
         }
 	}

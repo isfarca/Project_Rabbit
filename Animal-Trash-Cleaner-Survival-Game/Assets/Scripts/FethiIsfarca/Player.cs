@@ -3,12 +3,11 @@
 public class Player : MonoBehaviour
 {
     // Value types
-    private float x, z;
-    private float speed = 3f;
     private int slots = 10;
 
     // Reference types
     private GameObject[] backpack;
+    public GameObject[] trashes;
 
     /// <summary>
     /// Initialize variables and get scripts.
@@ -16,7 +15,7 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         // Initialize the length from array.
-        backpack = new GameObject[slots];
+        backpack = new GameObject[slots * 5];
     }
 
     /// <summary>
@@ -67,13 +66,14 @@ public class Player : MonoBehaviour
                 {
                     if (backpack[i].tag == other.tag)
                     {
-                        backpack[i].gameObject.SetActive(true);
+                        backpack[i].SetActive(true);
+                        backpack[i].transform.GetChild(0).gameObject.SetActive(true);
                         Debug.Log("Activated!");
                         backpack[i].transform.position = new Vector3
                         (
-                            Random.Range(transform.position.x - 5f, transform.position.x + 5f),
-                            87f,
-                            Random.Range(transform.position.z - 5f, transform.position.z + 5f)
+                            other.transform.position.x + Random.Range(-5f, 5f),
+                            other.transform.position.y,
+                            other.transform.position.z + Random.Range(-5f, 5f)
                         );
                         Debug.LogFormat("Garbage '{0}' filed!", backpack[i].tag);
                         backpack[i] = null;
