@@ -1,8 +1,0 @@
-sceneSetups:
-<<<<<<< HEAD
-- path: Assets/Scenes/TestFethi.unity
-=======
-- path: Assets/Scenes/Options.unity
->>>>>>> 4d9dedd00d7d74f8db1b0e091613354b2cbd371e
-  isLoaded: 1
-  isActive: 1
