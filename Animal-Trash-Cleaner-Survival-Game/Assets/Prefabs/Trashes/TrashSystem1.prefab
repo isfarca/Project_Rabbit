@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 4838296032623566}
   - component: {fileID: 33058715283897758}
   - component: {fileID: 23277206667594282}
-  - component: {fileID: 65338755398118410}
+  - component: {fileID: 135349567708520968}
   - component: {fileID: 114432327502542620}
   m_Layer: 0
   m_Name: Trash1
@@ -177,7 +177,6 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -193,7 +192,6 @@ MeshRenderer:
   m_PreserveUVs: 1
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -224,18 +222,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
---- !u!65 &65338755398118410
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1361800642185568}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.1519318, y: 2.0909667, z: 1.0979118}
-  m_Center: {x: -0.0025787354, y: 0.04548335, z: -0.008349419}
 --- !u!65 &65792053390698598
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -294,7 +280,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   throwTrash: 1
   minThrowFar: 500
-  maxThrowFar: 5000
+  maxThrowFar: 2000
 --- !u!114 &114837520094589580
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -330,6 +316,18 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 4
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!135 &135349567708520968
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1361800642185568}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1
+  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!135 &135721966746651126
 SphereCollider:
   m_ObjectHideFlags: 1

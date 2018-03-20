@@ -29,7 +29,7 @@ public class TrashSystem : MonoBehaviour
         // Throw trash.
         if (throwTrash)
         {
-            trashSystemRigidbody.AddForce(Vector3.forward * Random.Range(minThrowFar, maxThrowFar));
+            trashSystemRigidbody.AddForce(Vector3.right * Random.Range(minThrowFar, maxThrowFar));
             trashSystemRigidbody.useGravity = true;
 
             Debug.Log("Trash throwed!");

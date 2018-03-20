@@ -7,7 +7,6 @@ public class Player : MonoBehaviour
 
     // Reference types
     private GameObject[] backpack;
-    public GameObject[] trashes;
 
     /// <summary>
     /// Initialize variables and get scripts.

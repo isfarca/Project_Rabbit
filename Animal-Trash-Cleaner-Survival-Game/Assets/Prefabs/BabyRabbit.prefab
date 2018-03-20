@@ -97,6 +97,7 @@ MonoBehaviour:
   speed: 6
   target: {fileID: 0}
   followDistance: 3
+  trashDistance: 0.5
 --- !u!114 &114447954765401844
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -105,9 +106,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1255547941929304}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa43ad424ffa47b4e889ec1b0b2aaf14, type: 3}
+  m_Script: {fileID: 11500000, guid: 9bd06cde33f3dc944a1bc4a2882fd974, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tombstone: {fileID: 0}
 --- !u!136 &136690951533975450
 CapsuleCollider:
   m_ObjectHideFlags: 1

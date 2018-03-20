@@ -12,13 +12,13 @@ public class MouseRotation : MonoBehaviour
     {
         Cursor.visible = false;
 
-        offset = new Vector3(player.position.x, player.position.y + 10f, player.position.z);
+        offset = new Vector3(player.position.x, player.position.y + 200f, player.position.z);
     }
 
     void LateUpdate()
     {
         offset = Quaternion.AngleAxis(Input.GetAxis("Mouse X") * turnSpeed, Vector3.up) * offset;
-        transform.position = player.position + offset / 2;
+        transform.position = player.position + offset / 64;
         transform.LookAt(player.position);
     }
 }

@@ -72,8 +72,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4925933065068652}
   - component: {fileID: 33845944203032246}
+  - component: {fileID: 135144388263869230}
   - component: {fileID: 23487009514933838}
-  - component: {fileID: 65446636039468116}
   - component: {fileID: 114300258810193510}
   m_Layer: 0
   m_Name: Trash
@@ -120,7 +120,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1525976182964686}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 27.63, y: 1.33, z: 58}
+  m_LocalPosition: {x: 27.63, y: 1.01, z: 58}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4925933065068652}
@@ -177,7 +177,6 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -193,7 +192,6 @@ MeshRenderer:
   m_PreserveUVs: 1
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -224,18 +222,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
---- !u!65 &65446636039468116
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1829258757570404}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.0829887, y: 2, z: 1.0720901}
-  m_Center: {x: -0.01338768, y: 0, z: -0.02142334}
 --- !u!65 &65757262883167738
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -294,7 +280,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   throwTrash: 1
   minThrowFar: 500
-  maxThrowFar: 5000
+  maxThrowFar: 2000
 --- !u!114 &114997886832956332
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -317,6 +303,18 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 1.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!135 &135144388263869230
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1829258757570404}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.4476843
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &135158452159219928
 SphereCollider:
