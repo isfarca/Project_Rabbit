@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TrashManager : MonoBehaviour
 {
@@ -43,7 +44,7 @@ public class TrashManager : MonoBehaviour
                 instantiateCount++;
 
                 if (instantiateCount >= 100)
-                    Debug.Log("You Lost!");
+                    SceneManager.LoadScene(4);
 
                 // Reset seconds.
                 seconds = 0;

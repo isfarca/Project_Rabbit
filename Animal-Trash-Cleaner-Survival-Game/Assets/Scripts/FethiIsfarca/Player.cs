@@ -1,18 +1,29 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
     // Value types
     private int backpack;
-    private int paperTrash, plasticTrash, electricTrash;
-    private bool getTrash, setTrash;
+    private int paperTrash, plasticTrash;
+    private static int score;
 
     // Refernce types
+    private SpriteRenderer spriteRenderer;
+    private BabyRabbitControl babyRabbitControlScript;
     public Canvas canvasComponent;
     public Slider sliderComponent;
     public Text numberOfPaperTextComponent;
     public Text numberOfPlasticTextComponent;
+    public Texture2D[] texture2d;
+
+    private void Awake()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        babyRabbitControlScript = FindObjectOfType<BabyRabbitControl>();
+    }
 
     // Update is called once per frame
     private void Update()
@@ -43,6 +54,7 @@ public class Player : MonoBehaviour
                     Debug.Log("You get the trash!");
                     Destroy(other.gameObject);
                     backpack++;
+                    score += 10;
                 }
                 else if (other.CompareTag("Plastic"))
                 {
@@ -50,6 +62,7 @@ public class Player : MonoBehaviour
                     Debug.Log("You get the trash!");
                     Destroy(other.gameObject);
                     backpack++;
+                    score += 10;
                 }
             }
             else
@@ -61,9 +74,15 @@ public class Player : MonoBehaviour
         {
             // Is a setable trash?
             if (other.CompareTag("PaperTent"))
+            {
                 KillTrashes(ref paperTrash, ref backpack);
+                score += 50;
+            }
             else if (other.CompareTag("PlasticTent"))
+            {
                 KillTrashes(ref plasticTrash, ref backpack);
+                score += 50;
+            }
         }
 
         // Set Values for UI.
@@ -78,6 +97,7 @@ public class Player : MonoBehaviour
         Vector3 playerPosition;
         GUIStyle style = new GUIStyle();
         Font font;
+        Texture2D rabbitTexture2d = null;
 
         // Set the position from player.
         playerPosition = Camera.main.WorldToScreenPoint(transform.position);
@@ -87,7 +107,29 @@ public class Player : MonoBehaviour
 
         style.font = font;
         // Set font size for heading.
-        style.fontSize = 10;
+        style.fontSize = 50;
+
+        // By press the button 'F', than see the GUI-HUD.
+        if (Input.GetAxis("HUD") > 0)
+        {
+            if (babyRabbitControlScript.Health > 0)
+                rabbitTexture2d = texture2d[0];
+            else if (babyRabbitControlScript.Health <= 0)
+            {
+                rabbitTexture2d = texture2d[1];
+                score -= 100;
+                SceneManager.LoadScene(4);
+            }
+
+            GUI.DrawTexture(new Rect(playerPosition.x / 16, playerPosition.y / 24, 50, 50), rabbitTexture2d);
+            GUI.HorizontalSlider(new Rect(playerPosition.x / 4, playerPosition.y / 8, 150, 50), babyRabbitControlScript.Health, 0f, 10f);
+            GUI.DrawTexture(new Rect(playerPosition.x / 16, playerPosition.y / 4, 50, 50), rabbitTexture2d);
+            GUI.HorizontalSlider(new Rect(playerPosition.x / 4, playerPosition.y / 3, 150, 50), babyRabbitControlScript.Health, 0f, 10f);
+            GUI.DrawTexture(new Rect(playerPosition.x / 16, playerPosition.y / 2, 50, 50), rabbitTexture2d);
+            GUI.HorizontalSlider(new Rect(playerPosition.x / 4, playerPosition.y / 1.7f, 150, 50), babyRabbitControlScript.Health, 0f, 10f);
+
+            GUI.Label(new Rect(playerPosition.x * 1.3f, playerPosition.y / 24, 200, 100), "Score: " + score, style);
+        }
     }
 
     /// <summary>

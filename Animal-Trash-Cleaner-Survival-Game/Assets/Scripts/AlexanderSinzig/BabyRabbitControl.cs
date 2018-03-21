@@ -191,4 +191,8 @@ public class BabyRabbitControl : MonoBehaviour
         get { return startRoaming; }
     }
 
+    public int Health
+    {
+        get { return health; }
+    }
 }

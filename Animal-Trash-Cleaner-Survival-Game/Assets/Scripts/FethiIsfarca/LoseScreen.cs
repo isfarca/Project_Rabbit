@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LoseScreen : MonoBehaviour
 {
@@ -26,9 +27,9 @@ public class LoseScreen : MonoBehaviour
 
         // Buttons.
         if (GUI.Button(new Rect((Screen.width / 2 - 420), (Screen.height / 2 - 120), 200, 20), "Play", style))
-            Debug.Log("Play");
+            SceneManager.LoadScene(3);
         else if (GUI.Button(new Rect((Screen.width / 2 - 420), (Screen.height / 2 - 90), 200, 20), "Options", style))
-            Debug.Log("Options");
+            SceneManager.LoadScene(2);
         else if (GUI.Button(new Rect((Screen.width / 2 - 420), (Screen.height / 2 - 60), 200, 20), "Quit", style))
             Application.Quit();
     }

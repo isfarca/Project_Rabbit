@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Options : MonoBehaviour
 {
@@ -39,6 +40,6 @@ public class Options : MonoBehaviour
 
         // Back button.
         if (GUI.Button(new Rect((Screen.width / 2 - 420), (Screen.height / 2 + 50), 50, 50), backButton, style))
-            Debug.Log("Back");
+            SceneManager.LoadScene(1);
     }
 }
