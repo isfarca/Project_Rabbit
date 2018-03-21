@@ -11,6 +11,10 @@ TagManager:
   - Rest
   - Terrain
   - Trash
+  - Electric
+  - PlasticTent
+  - PaperTent
+  - ElectricTent
   layers:
   - Default
   - TransparentFX

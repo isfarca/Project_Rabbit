@@ -3,19 +3,9 @@
 public class Player : MonoBehaviour
 {
     // Value types
-    private int slots = 10;
-
-    // Reference types
-    private GameObject[] backpack;
-
-    /// <summary>
-    /// Initialize variables and get scripts.
-    /// </summary>
-    private void Awake()
-    {
-        // Initialize the length from array.
-        backpack = new GameObject[slots * 5];
-    }
+    private int backpack;
+    private int paperTrash, plasticTrash, electricTrash;
+    private bool getTrash, setTrash;
 
     /// <summary>
     /// By trigger with campsite and press button 'Q', than lay down the trashes. 
@@ -23,62 +13,49 @@ public class Player : MonoBehaviour
     /// <param name="other">Was effected by.</param>
     private void OnTriggerStay(Collider other)
     {
-        // Declare variables
-        int numberOfGarbage = 0;
-
-        // ---------- Get the trash. ----------
+        // ---------- Get the trash (Destroy). ----------
         if (Input.GetAxisRaw("Fire2") > 0)
         {
-            // Add garbage in backpack.
-            for (int i = 0; i < backpack.Length - 1; i++)
+            // Have you a place in your backpack?
+            if (backpack < 10)
             {
-                if (backpack[i] == null)
+                // Is a getable trash?
+                if (other.CompareTag("Paper"))
                 {
-                    backpack[i] = other.gameObject;
-                    other.gameObject.SetActive(false);
-
-                    Debug.LogFormat("Index: {0} | Garbage added in your backpack!", i);
-
-                    break;
+                    paperTrash++;
+                    Debug.Log("You get the trash!");
+                    Destroy(other.gameObject);
+                    backpack++;
+                }
+                else if (other.CompareTag("Plastic"))
+                {
+                    plasticTrash++;
+                    Debug.Log("You get the trash!");
+                    Destroy(other.gameObject);
+                    backpack++;
+                }
+                else if (other.CompareTag("Electric"))
+                {
+                    electricTrash++;
+                    Debug.Log("You get the trash!");
+                    Destroy(other.gameObject);
+                    backpack++;
                 }
             }
-
-            // Check, if the backpack is full.
-            for (int i = 0; i < backpack.Length; i++)
-            {
-                if (backpack[i] != null)
-                    numberOfGarbage++;
-                else if (backpack[i] == null)
-                    break;
-            }
-
-            if (numberOfGarbage == backpack.Length - 1)
+            else
                 Debug.Log("You have too much trash in your backpack!");
         }
 
         // ---------- Lay down the trash. ----------
         if (Input.GetAxisRaw("Fire2") < 0)
         {
-            for (int i = 0; i < backpack.Length; i++)
-            {
-                if (backpack[i] != null)
-                {
-                    if (backpack[i].tag == other.tag)
-                    {
-                        backpack[i].SetActive(true);
-                        backpack[i].transform.GetChild(0).gameObject.SetActive(true);
-                        Debug.Log("Activated!");
-                        backpack[i].transform.position = new Vector3
-                        (
-                            other.transform.position.x + Random.Range(-5f, 5f),
-                            other.transform.position.y,
-                            other.transform.position.z + Random.Range(-5f, 5f)
-                        );
-                        Debug.LogFormat("Garbage '{0}' filed!", backpack[i].tag);
-                        backpack[i] = null;
-                    }
-                }
-            }
+            // Is a setable trash?
+            if (other.CompareTag("PaperTent"))
+                KillTrashes(ref paperTrash, ref backpack);
+            else if (other.CompareTag("PlasticTent"))
+                KillTrashes(ref plasticTrash, ref backpack);
+            else if (other.CompareTag("ElectricTent"))
+                KillTrashes(ref electricTrash, ref backpack);
         }
     }
 
@@ -101,7 +78,7 @@ public class Player : MonoBehaviour
         style.fontSize = 10;
 
         // Count the number of trash-kind.
-        for (int i = 0; i < backpack.Length; i++)
+        /*for (int i = 0; i < backpack.Length; i++)
         {
             if (backpack[i] != null)
             {
@@ -112,7 +89,7 @@ public class Player : MonoBehaviour
                 else if (backpack[i].tag == "Rest")
                     restTrash++;
             }
-        }
+        }*/
 
         // Heading.
         GUI.Label(new Rect(playerPosition.x / 16, Screen.height - playerPosition.y + 50, 20, 10), "Paper: " + paperTrash, style);
@@ -123,5 +100,22 @@ public class Player : MonoBehaviour
         paperTrash = 0;
         plasticTrash = 0;
         restTrash = 0;
+    }
+
+    /// <summary>
+    /// Kill trashes from backpack.
+    /// </summary>
+    /// <param name="trash">Number of trash-kind.</param>
+    /// <param name="backpack">Number of trashes in backpack.</param>
+    void KillTrashes(ref int trash, ref int backpack)
+    {
+        // When have a trash, than reduce the backpack.
+        if (trash > 0)
+        {
+            for (int i = 0; i < trash; i++)
+                backpack--;
+
+            trash = 0;
+        }
     }
 }

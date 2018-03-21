@@ -11,12 +11,16 @@ public class BabyRabbitMovement : MonoBehaviour
     private Rigidbody babyRabbitRigidbody;
     private BabyRabbitControl babyRabbitControlScript;
 
+    //for the animation
+    private Animator animator;
+
 
     //find own ridigbody
     private void Awake()
     {
         babyRabbitRigidbody = GetComponent<Rigidbody>();
         babyRabbitControlScript = GetComponent<BabyRabbitControl>();
+        animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -25,7 +29,7 @@ public class BabyRabbitMovement : MonoBehaviour
         //follow player as usual
         if (babyRabbitControlScript.ForceMove)
         {
-            //look at target
+            //find payer as spare target
             if (target == null)
             {
                 target = GameObject.Find("Player").transform;
@@ -82,6 +86,9 @@ public class BabyRabbitMovement : MonoBehaviour
         {
             //move forward
             babyRabbitRigidbody.velocity = transform.forward * speed;
+            //forward animation
+            //animator.SetBool("moving", true);
+
         }
         else
         {
@@ -93,5 +100,6 @@ public class BabyRabbitMovement : MonoBehaviour
     void Stand()
     {
         babyRabbitRigidbody.velocity = Vector3.zero;
+        //animator.SetBool("moving", false);
     }
 }
