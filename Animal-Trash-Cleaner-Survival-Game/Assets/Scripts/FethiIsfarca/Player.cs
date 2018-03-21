@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using UnityEditor;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -7,6 +7,22 @@ public class Player : MonoBehaviour
     private int backpack;
     private int paperTrash, plasticTrash, electricTrash;
     private bool getTrash, setTrash;
+
+    // Refernce types
+    public Canvas canvasComponent;
+    public Slider sliderComponent;
+    public Text numberOfPaperTextComponent;
+    public Text numberOfPlasticTextComponent;
+
+    // Update is called once per frame
+    private void Update()
+    {
+        // By press the button 'F', than see the HUD.
+        if (Input.GetAxis("HUD") > 0)
+            canvasComponent.enabled = true;
+        else
+            canvasComponent.enabled = false;
+    }
 
     /// <summary>
     /// By trigger with campsite and press button 'Q', than lay down the trashes. 
@@ -49,6 +65,11 @@ public class Player : MonoBehaviour
             else if (other.CompareTag("PlasticTent"))
                 KillTrashes(ref plasticTrash, ref backpack);
         }
+
+        // Set Values for UI.
+        sliderComponent.value = backpack;
+        numberOfPaperTextComponent.text = paperTrash.ToString();
+        numberOfPlasticTextComponent.text = plasticTrash.ToString();
     }
 
     private void OnGUI()
@@ -67,8 +88,6 @@ public class Player : MonoBehaviour
         style.font = font;
         // Set font size for heading.
         style.fontSize = 10;
-
-        EditorGUI.ProgressBar(new Rect(playerPosition.x + 100, playerPosition.y / 1.25f, 20, 100), 100f, "");
     }
 
     /// <summary>

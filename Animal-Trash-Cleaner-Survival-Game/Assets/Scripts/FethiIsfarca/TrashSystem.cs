@@ -59,6 +59,8 @@ public class TrashSystem : MonoBehaviour
                 Destroy(gameObject);
 
             trashSystemRigidbody.velocity = Vector3.zero;
+
+            this.GetComponent<TrashSystem>().enabled = false;
         }
     }
 }

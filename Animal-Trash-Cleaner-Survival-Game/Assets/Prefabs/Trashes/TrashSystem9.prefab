@@ -157,6 +157,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4827147783190056}
   - component: {fileID: 65582006442720290}
+  - component: {fileID: 114962599807853398}
   m_Layer: 0
   m_Name: schachtel
   m_TagString: Untagged
@@ -599,6 +600,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 593f955ba8d9d9d40ade9de3bdd71120, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114962599807853398
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1887920427106070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e003a50fbf7790468ee6894eed61309, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!135 &135162205966428668
