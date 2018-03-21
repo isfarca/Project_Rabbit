@@ -2,55 +2,59 @@
 
 public class PlayerMovement : MonoBehaviour
 {
-    private float sprintSpeedBonus = 0f;
+    public bool sprintEnable = false;
+    private float sprintSpeedBonus = 0.5f;
     private CharacterMotorC cmotor;
+    public float speed;
+    private Vector3 forwardVector;
+
+
+    //animator is integrated in movementScript to optimize synchrinisation
+    private Transform rabbitBody;
+    private Animator animator;
+
 
     void Awake()
     {
         cmotor = GetComponent<CharacterMotorC>();
+        speed = 1.0f;
+        rabbitBody = gameObject.transform.GetChild(0);
+        animator = rabbitBody.GetComponent<Animator>();
     }
 
 
     void Update()
     {
 
-        if (Input.GetButton("Fire3"))
-        {
-            sprintSpeedBonus = 6f;
-        }
-        else
-        {
-            sprintSpeedBonus = 0f;
-        }
+        //movement animator information
+        animator.SetFloat("InputForward", Input.GetAxisRaw("Vertical"));
+        animator.SetFloat("InputSides", Input.GetAxisRaw("Horizontal"));
+        //grabing animator information
+        animator.SetBool("Grab", Input.GetButton("Fire2"));
+        //removed
+        //animator.SetBool("Jump", Input.GetButton("Jump"));
 
         var x = Input.GetAxis("Horizontal") * Time.deltaTime * 150.0f;
         transform.Rotate(0, x, 0);
 
-        Vector3 forwardVector;
 
-        //var z = Input.GetAxis("Vertical") * Time.deltaTime * (12.0f + sprintSpeedBonus);
-        forwardVector = new Vector3(0, 0, Input.GetAxis("Vertical"));
-
-        if (Input.GetAxis("Vertical") > 0)
+        //vector length alters if player sprints, or walks 
+        //sprint gets enabled/disabled in BabyRabbitMovement script
+        if (Input.GetButton("Fire3") && sprintEnable)
         {
-            float directionLength = forwardVector.magnitude;
-            forwardVector = forwardVector / directionLength;
-
-            
-            directionLength = Mathf.Min(1, directionLength);
-
-            
-            directionLength = directionLength * directionLength;
-
-
-            forwardVector = forwardVector * directionLength;
+            //sprint (only possible if babyrabbits dont follow)
+            forwardVector = new Vector3(0, 0, Input.GetAxis("Vertical") * (speed + sprintSpeedBonus));
+            //sprint animator information
+            animator.SetBool("Sprint", true);
+        }
+        else
+        {
+            forwardVector = new Vector3(0, 0, Input.GetAxis("Vertical") * speed);
+            //sprint animator information
+            animator.SetBool("Sprint", false);
         }
 
-        // Apply the direction to the CharacterMotor
+        // use characterMotor to move
         cmotor.inputMoveDirection = transform.rotation * forwardVector;
-
-
-
-        //transform.Translate(0, 0, z);
     }
 }

@@ -55,6 +55,9 @@ public class TrashSystem : MonoBehaviour
             trashSystemRigidbody.useGravity = false;
             gameObject.GetComponent<Collider>().isTrigger = true;
 
+            if (transform.rotation.x != 0f || transform.rotation.y != 0f || transform.rotation.z != 0f)
+                Destroy(gameObject);
+
             trashSystemRigidbody.velocity = Vector3.zero;
         }
     }

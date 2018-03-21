@@ -42,7 +42,7 @@ public class TrashManager : MonoBehaviour
 
                 instantiateCount++;
 
-                if (instantiateCount >= 50)
+                if (instantiateCount >= 100)
                     Debug.Log("You Lost!");
 
                 // Reset seconds.

@@ -2,29 +2,39 @@
 
 public class BabyRabbitMovement : MonoBehaviour
 {
-    
-    public float speed = 6.0f;
-    //variables to save own rigidbody, other ojects and other scripts
+
+    //variables for following
     public Transform target;
     public float followDistance = 3f;
-    public float trashDistance = 0.5f;
-    private Rigidbody babyRabbitRigidbody;
+    private float trashDistance = 4f;
+
+    //variables for own components
     private BabyRabbitControl babyRabbitControlScript;
-
-    //for the animation
     private Animator animator;
+    private CharacterMotorC cmotor;
+
+    //variables for player speed/sprint
+    private PlayerMovement playerMovementScript;
+    private float babySpeed;
 
 
-    //find own ridigbody
     private void Awake()
     {
-        babyRabbitRigidbody = GetComponent<Rigidbody>();
+
         babyRabbitControlScript = GetComponent<BabyRabbitControl>();
+        //find animator and other scripts
         animator = GetComponent<Animator>();
+        cmotor = GetComponent<CharacterMotorC>();
+
+        //set babyspeed value
+        playerMovementScript = FindObjectOfType<PlayerMovement>();
+        babySpeed = playerMovementScript.speed;
+
     }
 
     void Update()
     {
+        //force move
         //highest priority
         //follow player as usual
         if (babyRabbitControlScript.ForceMove)
@@ -38,6 +48,7 @@ public class BabyRabbitMovement : MonoBehaviour
         }
         else
         {
+            //point of interest
             //second highest priority
             //go to the veryInteresting pointOfInterest
             if (babyRabbitControlScript.VeryInteresting)
@@ -62,6 +73,9 @@ public class BabyRabbitMovement : MonoBehaviour
             //stay
             if (babyRabbitControlScript.Stay)
             {
+                //enable sprint for player
+                playerMovementScript.sprintEnable = true;
+
                 //turn to the interesting pointOfInterest
                 //third highest priority
                 if (babyRabbitControlScript.Interesting && babyRabbitControlScript.StartRoaming)
@@ -73,6 +87,11 @@ public class BabyRabbitMovement : MonoBehaviour
                     Stand();
                 }
             }
+            else
+            {
+               //disable sprint for player
+               playerMovementScript.sprintEnable = false;
+            }
         }
     }
 
@@ -82,12 +101,15 @@ public class BabyRabbitMovement : MonoBehaviour
         //turn to the object
         transform.LookAt(point);
 
+        Vector3 forwardVector;
+        forwardVector = new Vector3(0, 0, babySpeed);
+
         if (Vector3.Distance(point, transform.position) >= minimumDistance)
         {
             //move forward
-            babyRabbitRigidbody.velocity = transform.forward * speed;
+            cmotor.inputMoveDirection = transform.rotation * forwardVector;
             //forward animation
-            //animator.SetBool("moving", true);
+            animator.SetBool("Moving", true);
 
         }
         else
@@ -99,7 +121,7 @@ public class BabyRabbitMovement : MonoBehaviour
     //hold position
     void Stand()
     {
-        babyRabbitRigidbody.velocity = Vector3.zero;
-        //animator.SetBool("moving", false);
+        cmotor.inputMoveDirection = transform.rotation * Vector3.zero;
+        animator.SetBool("Moving", false);
     }
 }

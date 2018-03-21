@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PuddleEffects : MonoBehaviour {
 
-    private Vector3 puddlePosition;
+    private Vector3 trashPosition;
     private string objectName;
     private GameObject collidingBaby;
     private BabyRabbitControl babyRabbitControlScript;
@@ -22,23 +22,27 @@ public class PuddleEffects : MonoBehaviour {
         //puddle-area saves its position wich equals the puddle-position
         if (objectName != "Puddle")
         {
-            child = this.gameObject.transform.GetChild(0);
-            puddlePosition = child.position;
+            trashPosition = transform.position;
+            //child = gameObject.transform.GetChild(0);
+            //puddlePosition = child.position;
         }
 	}
 
     private void OnTriggerEnter (Collider other)
     {
         //only if a RabbitBaby enters the area
-        if (other.gameObject.tag == "BabyRabbit")
+        if (objectName != "Puddle" && other.gameObject.tag == "BabyRabbit")
         {
             //get acess to the script of the colliding RabbitBaby
             collidingBaby = other.gameObject;
             babyRabbitControlScript = collidingBaby.GetComponent<BabyRabbitControl>();
             //send position of the puddle
-            if (puddlePosition != new Vector3(0f, 0f, 0f))
+            if (trashPosition != new Vector3(0f, 0f, 0f))
             {
-                babyRabbitControlScript.EnterArea(objectName, puddlePosition);
+                //test
+                Debug.Log(trashPosition);
+
+                babyRabbitControlScript.EnterArea(objectName, trashPosition);
             }
         }
     }
@@ -46,15 +50,15 @@ public class PuddleEffects : MonoBehaviour {
     private void OnTriggerExit(Collider other)
     {
         //only if a RabbitBaby leaves the area
-        if (other.gameObject.tag == "BabyRabbit")
+        if (objectName != "Puddle" && other.gameObject.tag == "BabyRabbit")
         {
             //get acess to the script of the colliding RabbitBaby
             collidingBaby = other.gameObject;
             babyRabbitControlScript = collidingBaby.GetComponent<BabyRabbitControl>();
             //send position of the puddle
-            if (puddlePosition != new Vector3(0f, 0f, 0f))
+            if (trashPosition != new Vector3(0f, 0f, 0f))
             {
-                babyRabbitControlScript.LeaveArea(objectName, puddlePosition);
+                babyRabbitControlScript.LeaveArea(objectName, trashPosition);
             }
         }
     }

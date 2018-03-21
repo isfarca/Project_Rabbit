@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEditor;
 
 public class Player : MonoBehaviour
 {
@@ -34,13 +35,6 @@ public class Player : MonoBehaviour
                     Destroy(other.gameObject);
                     backpack++;
                 }
-                else if (other.CompareTag("Electric"))
-                {
-                    electricTrash++;
-                    Debug.Log("You get the trash!");
-                    Destroy(other.gameObject);
-                    backpack++;
-                }
             }
             else
                 Debug.Log("You have too much trash in your backpack!");
@@ -54,15 +48,12 @@ public class Player : MonoBehaviour
                 KillTrashes(ref paperTrash, ref backpack);
             else if (other.CompareTag("PlasticTent"))
                 KillTrashes(ref plasticTrash, ref backpack);
-            else if (other.CompareTag("ElectricTent"))
-                KillTrashes(ref electricTrash, ref backpack);
         }
     }
 
     private void OnGUI()
     {
         // Declare variables
-        int paperTrash = 0, plasticTrash = 0, restTrash = 0;
         Vector3 playerPosition;
         GUIStyle style = new GUIStyle();
         Font font;
@@ -77,29 +68,7 @@ public class Player : MonoBehaviour
         // Set font size for heading.
         style.fontSize = 10;
 
-        // Count the number of trash-kind.
-        /*for (int i = 0; i < backpack.Length; i++)
-        {
-            if (backpack[i] != null)
-            {
-                if (backpack[i].tag == "Paper")
-                    paperTrash++;
-                else if (backpack[i].tag == "Plastic")
-                    plasticTrash++;
-                else if (backpack[i].tag == "Rest")
-                    restTrash++;
-            }
-        }*/
-
-        // Heading.
-        GUI.Label(new Rect(playerPosition.x / 16, Screen.height - playerPosition.y + 50, 20, 10), "Paper: " + paperTrash, style);
-        GUI.Label(new Rect(playerPosition.x / 16, Screen.height - playerPosition.y + 70, 20, 10), "Plastic: " + plasticTrash, style);
-        GUI.Label(new Rect(playerPosition.x / 16, Screen.height - playerPosition.y + 90, 20, 10), "Rest: " + restTrash, style);
-
-        // Reset the number of trash-kinds.
-        paperTrash = 0;
-        plasticTrash = 0;
-        restTrash = 0;
+        EditorGUI.ProgressBar(new Rect(playerPosition.x + 100, playerPosition.y / 1.25f, 20, 100), 100f, "");
     }
 
     /// <summary>

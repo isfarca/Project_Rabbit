@@ -22,7 +22,7 @@ public class BabyRabbitControl : MonoBehaviour
     private bool interesting = false;
     private bool veryInteresting = false;
 
-    //varaibles for life/damage
+    //variables for life/damage
     private int health;
     public Transform tombstone;
 
@@ -71,7 +71,7 @@ public class BabyRabbitControl : MonoBehaviour
             }
         }
 
-        //if the roamingTimer reaches 0, the babyRabbits will start roaming
+        //if the roamingTimer reaches 0, the babyRabbits will start looking for trash in a greater area
         if (roamingTimer > 0)
         {
             roamingTimer--;
@@ -108,7 +108,7 @@ public class BabyRabbitControl : MonoBehaviour
     /// save the position of the area entered and how interesting it is
     /// </summary>
     /// <param name="areaName"></param>
-    /// <param name="centerPosition"></param>
+    /// <param name="centerPosition">the position of the trash</param>
     public void EnterArea (string areaName, Vector3 centerPosition)
     {
         pointOfInterest = centerPosition;
